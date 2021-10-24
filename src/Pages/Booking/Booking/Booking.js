@@ -4,17 +4,18 @@ import { useParams } from 'react-router';
 const Booking = () => {
     const { serviceId } = useParams();
 
-    const [services, setServices] = useState([]);
+    const [service, setService] = useState({});
     useEffect(() => {
-        fetch('https://raw.githubusercontent.com/Rony163/Genius-Car-Mecanics/main/public/services.json')
+        fetch(`http://localhost:5000/services/${serviceId}`)
             .then(res => res.json())
-            .then(data => setServices(data))
+            .then(data => setService(data))
     }, [])
-    console.log(services.length);
+    // console.log(services.length);
 
     return (
         <div>
             <h1>This is Booking {serviceId}</h1>
+            <h2>Details of: {service.name}</h2>
         </div>
     );
 };
